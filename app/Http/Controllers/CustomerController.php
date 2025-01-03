@@ -50,6 +50,7 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    //Frontend side cusomer store
     public function store(Request $request)
     {
         $request->validate([
@@ -83,6 +84,7 @@ class CustomerController extends Controller
         return redirect()->route('customershow')->with('success', 'Customer Deleted Successfully');
     }
 
+    //Single mail template
     public function singlemailTemp(string $id){
 
         $customerdata = Customer::find($id);
@@ -90,8 +92,8 @@ class CustomerController extends Controller
         return view('customer.singlemailtemp', compact('customerdata'));
     }
 
+    //Single mail send
     public function singlemailsend(Request $request){
-        // dd($request);
         $request->validate([
             'subject' => 'required',
             'message' => 'required',
@@ -125,20 +127,21 @@ class CustomerController extends Controller
         }
     }
 
+    //Customer Mail List
     public function customerIndex(){
         $maildatas = CustomerMail::get();
 
         return view('mail.index', compact('maildatas'));
     }
 
-
+    // Selected custome temp
     public function mailSend(){
         $customerdatas = Customer::get();
 
         return view('mail.alltemp',compact('customerdatas'));
     }
 
-
+    // Selected all custome mail send 
         public function selectedmailsend(Request $request)
     {
         // Validate the request
